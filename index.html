@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Do You Love Me?</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Do you love me?</h1>
+        <button class="button" id="yes">Yes</button>
+        <button class="button" id="no">No</button>
+        <div class="message" id="message">I love you too! ❤️</div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+        const container = document.querySelector('.container');
+        const message = document.getElementById('message');
+        const containerWidth = container.offsetWidth;
+        const containerHeight = container.offsetHeight;
+
+        noButton.addEventListener('mouseover', function() {
+            const offsetX = Math.random() * (containerWidth - 100) - (containerWidth / 2 - 50);
+            const offsetY = Math.random() * (containerHeight - 100) - (containerHeight / 2 - 50);
+            noButton.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        });
+
+        noButton.addEventListener('click', function() {
+            alert("No turning back! You have to love me 😜");
+            noButton.style.display = 'none';
+        });
+
+        yesButton.addEventListener('click', function() {
+            yesButton.style.display = 'none';
+            noButton.style.display = 'none';
+            message.style.display = 'block';
+            createConfetti();
+        });
+
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.animationDuration = Math.random() * 2 + 3 + 's';
+                confetti.style.backgroundColor = getRandomColor();
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        function getRandomColor() {
+            const colors = ['#FF6F61', '#FF9F80', '#FFCC80', '#FFEB99', '#D4EFDF', '#AED6F1', '#D7BDE2', '#F5B7B1'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html>
